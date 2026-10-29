@@ -1,0 +1,534 @@
+@import './theme.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Accessible focus styling */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Layout container */
+.app-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.app-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-info-bg);
+  border: 1px solid var(--color-info-border);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.app-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Disclaimer notice */
+.disclaimer-banner {
+  background: var(--color-info-bg);
+  border: 1px solid var(--color-info-border);
+  color: var(--color-info-text);
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.disclaimer-icon {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.1rem;
+}
+
+/* Filter bar */
+.filter-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.filter-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.filter-buttons {
+  display: flex;
+  background: var(--color-bg);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  gap: 0.25rem;
+}
+
+.filter-btn {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface-hover);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  color: #0b0f19;
+  font-weight: 600;
+}
+
+/* Earthquake list */
+.earthquake-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.earthquake-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.earthquake-count-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.earthquake-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+/* Earthquake Card */
+.earthquake-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.earthquake-card:hover {
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+.magnitude-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-md);
+  border: 2px solid;
+  flex-shrink: 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.magnitude-badge.leve {
+  background: var(--severity-leve-bg);
+  border-color: var(--severity-leve-border);
+  color: var(--severity-leve-text);
+}
+
+.magnitude-badge.moderado {
+  background: var(--severity-moderado-bg);
+  border-color: var(--severity-moderado-border);
+  color: var(--severity-moderado-text);
+}
+
+.magnitude-badge.fuerte {
+  background: var(--severity-fuerte-bg);
+  border-color: var(--severity-fuerte-border);
+  color: var(--severity-fuerte-text);
+}
+
+.magnitude-badge.unknown {
+  background: rgba(100, 116, 139, 0.15);
+  border-color: var(--color-text-muted);
+  color: var(--color-text-secondary);
+}
+
+.magnitude-number {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.severity-label-text {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.place-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.card-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.card-action-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.earthquake-card:hover .card-action-icon {
+  color: var(--color-primary);
+  transform: translateX(3px);
+}
+
+/* Detail view */
+.detail-view {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.6rem;
+  margin-left: -0.6rem;
+  border-radius: var(--radius-sm);
+  width: fit-content;
+  transition: background-color var(--transition-fast);
+}
+
+.back-button:hover {
+  background: var(--color-surface-hover);
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.25rem;
+}
+
+.detail-place {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.detail-item {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detail-item-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.detail-item-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.detail-source-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.external-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.external-source-link:hover {
+  border-color: var(--color-primary);
+  background: var(--color-surface-hover);
+  color: #ffffff;
+}
+
+/* Status States (Loading, Empty, Error) */
+.status-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  gap: 1rem;
+}
+
+.status-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-text-secondary);
+}
+
+.status-icon.error {
+  color: var(--severity-fuerte-text);
+}
+
+.status-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.status-desc {
+  color: var(--color-text-secondary);
+  max-width: 480px;
+  font-size: 0.95rem;
+}
+
+.retry-button {
+  margin-top: 0.5rem;
+  background: var(--color-primary);
+  color: #0b0f19;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.retry-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Spinner */
+.spinner {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .app-container {
+    padding: 1.25rem 1rem 3rem;
+  }
+  .filter-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .earthquake-card {
+    padding: 1rem;
+  }
+  .magnitude-badge {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+  .magnitude-number {
+    font-size: 1.15rem;
+  }
+}
